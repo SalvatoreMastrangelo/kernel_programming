@@ -1,0 +1,52 @@
+# Linux kernel source and build artifacts
+linux-*
+!linux-*.patch
+
+# Busybox source and build artifacts
+busybox/
+
+# Compilation artifacts
+*.o
+*.ko
+*.so
+*.a
+*.lib
+*.out
+*.elf
+
+# Object and build directories
+.build/
+build/
+*.build/
+
+# Kernel build artifacts
+vmlinux
+vmlinuz
+bzImage
+System.map
+.config
+.version
+.tmp_versions/
+
+# Busybox build artifacts
+.config.old
+busybox_unstripped
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+tags
+cscope.*
+
+# Dependency files
+*.d
+*.cmd
+
+# Misc generated files
+*.mod.c
+modules.order
+Module.symvers
