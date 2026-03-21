@@ -2,18 +2,21 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <string.h>
+#include <time.h>
+#include <sys/time.h>
 
-#define DEVICE_NAME "/dev/my_misc_device"
+#define DEVICE_NAME "/dev/periodic_device"
 
 int main(void)
 {
     const char *dev_name = DEVICE_NAME;
     int fd;
-    int value = 42;
-    char write_buf[32];
-    char read_buf[32];
+    __uint64_t written_value;
+    __uint64_t read_value;  
     ssize_t n;
+
+    printf("Enter a period in milliseconds: ");
+    scanf("%llu", (unsigned long long *)&written_value);
 
     fd = open(dev_name, O_RDWR);
     if (fd < 0) {
@@ -21,30 +24,28 @@ int main(void)
         return EXIT_FAILURE;
     }
 
-    snprintf(write_buf, sizeof(write_buf), "%d\n", value);
-    n = write(fd, write_buf, strlen(write_buf));
+    n = write(fd, &written_value, sizeof(written_value));
     if (n < 0) {
         perror("write");
         close(fd);
         return EXIT_FAILURE;
     }
-    printf("Written: %s", write_buf);
+    printf("Written: %llu\n", (unsigned long long)written_value);
 
-    /* Seek back to the beginning before reading */
-    if (lseek(fd, 0, SEEK_SET) < 0) {
-        perror("lseek");
-        close(fd);
-        return EXIT_FAILURE;
-    }
+    struct timeval start, end;
+    gettimeofday(&start, NULL);
 
-    n = read(fd, read_buf, sizeof(read_buf) - 1);
+    n = read(fd, &read_value, sizeof(read_value));
     if (n < 0) {
         perror("read");
         close(fd);
         return EXIT_FAILURE;
     }
-    read_buf[n] = '\0';
-    printf("Read back: %s", read_buf);
+
+    gettimeofday(&end, NULL);
+    long elapsed_us = (end.tv_sec - start.tv_sec) * 1000000 +
+                      (end.tv_usec - start.tv_usec);
+    printf("Elapsed time: %ld us (%.3f ms)\n", elapsed_us, elapsed_us / 1000.0);
 
     close(fd);
     return EXIT_SUCCESS;

@@ -7,6 +7,10 @@ make
 make install
 cd ..
 
+# Compile the test program
+rm -f qemu_shared/test 
+gcc -static -o qemu_shared/test qemu_shared/test.c
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 KERNEL=linux-6.19.6/arch/x86_64/boot/bzImage
 INITRAMFS=busybox/initramfs.cpio.gz
