@@ -1,14 +1,11 @@
 #include <linux/module.h>
-#include <linux/moduleparam.h>
 #include <linux/init.h>
 #include <linux/miscdevice.h>
 #include <linux/slab.h>
 #include <linux/types.h>
 #include <linux/kernel.h>
 #include <linux/fs.h>
-#include <linux/poll.h>
 #include <linux/sched.h>
-#include <linux/spinlock.h>
 #include <linux/timer.h>
 #include <linux/list.h>
 

@@ -13,6 +13,7 @@ busybox/
 *.lib
 *.out
 *.elf
+*.mod
 qemu_shared/test
 qemu_shared/test_multithread
 

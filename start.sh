@@ -32,8 +32,3 @@ qemu-system-x86_64 \
   -enable-kvm \
   -fsdev local,security_model=passthrough,id=fsdev0,path=qemu_shared \
   -device virtio-9p-pci,fsdev=fsdev0,mount_tag=shared
-
-
-# execute inside busybox to get the shared folder
-# mkdir mnt
-# mount -t 9p -o trans=virtio shared /mnt
