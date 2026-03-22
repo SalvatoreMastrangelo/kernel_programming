@@ -8,8 +8,11 @@ make install
 cd ..
 
 # Compile the test program
-rm -f qemu_shared/test 
+rm -f qemu_shared/test
+rm -f qemu_shared/test_multithread
+
 gcc -static -o qemu_shared/test qemu_shared/test.c
+gcc -static -o qemu_shared/test_multithread qemu_shared/test_multithread.c
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 KERNEL=linux-6.19.6/arch/x86_64/boot/bzImage

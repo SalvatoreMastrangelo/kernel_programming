@@ -14,7 +14,7 @@
 
 
 MODULE_AUTHOR("Salvatore Mastrangelo");
-MODULE_DESCRIPTION("Test for misc devices");
+MODULE_DESCRIPTION("Periodic device");
 MODULE_LICENSE("GPL");
 
 

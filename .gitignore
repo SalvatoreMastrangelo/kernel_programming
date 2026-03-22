@@ -13,6 +13,8 @@ busybox/
 *.lib
 *.out
 *.elf
+qemu_shared/test
+qemu_shared/test_multithread
 
 # Object and build directories
 .build/
